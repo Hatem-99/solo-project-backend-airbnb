@@ -85,10 +85,10 @@ accommodationsRouter.put(
       });
 
       if (
-        updatedAccommodation.host._id.toString() === req.user._id.toString()
+       updatedAccommodation && updatedAccommodation.host._id.toString() === req.user._id.toString()
       ) {
         res.send(updatedAccommodation);
-      } else if (updatedAccommodation.host !== req.user._id) {
+      } else if (updatedAccommodation && updatedAccommodation.host !== req.user._id) {
         next(
           createHttpError(
             403,
@@ -125,7 +125,7 @@ accommodationsRouter.delete(
                     req.params.accommodationId
                   );
                 if (deletedAccommodation) {
-                  res.status(204).send({ message: "user has been deleted."} );
+                  res.status(201).send({ message: "accommodation has been deleted."} );
                 } 
               }else {
                 next(
